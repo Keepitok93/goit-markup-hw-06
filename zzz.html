@@ -55,18 +55,27 @@
       </div>
 
       <div role="group">
-        <input
-          type="radio"
-          name="experience"
-          value="junior"
-          id="junior"
-          checked
-        />
-        <label for="junior">Junior</label>
-        <input type="radio" name="experience" value="middle" id="middle" />
-        <label for="middle">Middle</label>
-        <input type="radio" name="experience" value="senior" id="senior" />
-        <label for="senior">Senior</label>
+        <h2 class="group-title">Уровень вашей экспертизы</h2>
+        <ul class="experienc-options">
+          <li>
+            <input
+              type="radio"
+              name="experience"
+              value="junior"
+              id="junior"
+              checked
+            />
+            <label for="junior">Junior</label>
+          </li>
+          <li>
+            <input type="radio" name="experience" value="middle" id="middle" />
+            <label for="middle">Middle</label>
+          </li>
+          <li>
+            <input type="radio" name="experience" value="senior" id="senior" />
+            <label for="senior">Senior</label>
+          </li>
+        </ul>
       </div>
 
       <label for="date">Время доклада</label>
@@ -113,6 +122,5 @@
           });
       })();
     </script>
-    <!--Скрипт формы-->
   </body>
 </html>
