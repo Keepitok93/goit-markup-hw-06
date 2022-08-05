@@ -122,5 +122,86 @@
           });
       })();
     </script>
+
+    <!--Скрипт пошуку-->
+
+    <script type="text/javascript">
+      var lastResFind = ""; // последний удачный результат
+      var copy_page = ""; // копия страницы в ихсодном виде
+      function TrimStr(s) {
+        s = s.replace(/^\s+/g, "");
+        return s.replace(/\s+$/g, "");
+      }
+      function FindOnPage(inputId) {
+        //ищет текст на странице, в параметр передается ID поля для ввода
+        var obj = window.document.getElementById(inputId);
+        var textToFind;
+
+        if (obj) {
+          textToFind = TrimStr(obj.value); //обрезаем пробелы
+        } else {
+          alert("Введена фраза не знайдена");
+          return;
+        }
+        if (textToFind == "") {
+          alert("Ви нічого не ввели");
+          return;
+        }
+
+        if (document.body.innerHTML.indexOf(textToFind) == "-1")
+          alert("Нічого не знайдено, перевірте правильність вводу");
+
+        if (copy_page.length > 0) document.body.innerHTML = copy_page;
+        else copy_page = document.body.innerHTML;
+
+        document.body.innerHTML = document.body.innerHTML.replace(
+          eval("/name=" + lastResFind + "/gi"),
+          " "
+        ); //стираем предыдущие якори для скрола
+        document.body.innerHTML = document.body.innerHTML.replace(
+          eval("/" + textToFind + "/gi"),
+          "<a name=" +
+            textToFind +
+            " style='background:red'>" +
+            textToFind +
+            "</a>"
+        ); //Заменяем найденный текст ссылками с якорем;
+        lastResFind = textToFind; // сохраняем фразу для поиска, чтобы в дальнейшем по ней стереть все ссылки
+        window.location = "#" + textToFind; //перемещаем скрол к последнему найденному совпадению
+      }
+    </script>
+    <body>
+      <h2>Пошук</h2>
+      <input type="text" id="text-to-find" value="" />
+      <input
+        type="button"
+        onclick="javascript: FindOnPage('text-to-find'); return false;"
+        value="Шукати"
+      />
+      <p>Введіть слово чи фразу для пошуку</p>
+
+      <!-- <table border="2" cellpadding="20">
+        <tr>
+          <th>Товар</th>
+          <th>Вес</th>
+          <th>Стоимость</th>
+        </tr>
+        <tr>
+          <td>Монитор 19 дюймов</td>
+          <td>1 кг</td>
+          <td>1900 руб.</td>
+        </tr>
+        <tr>
+          <td>монитор 18 дюймов</td>
+          <td>2 кг</td>
+          <td>1800 руб.</td>
+        </tr>
+        <tr>
+          <td>Монитор 20 дюймов</td>
+          <td>2 кг</td>
+          <td>1900 руб.</td>
+        </tr>
+      </table> -->
+    </body>
   </body>
 </html>
